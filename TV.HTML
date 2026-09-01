@@ -1,0 +1,4805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="Manual de Usuario - Televisor Smart TV">
+
+<title>Manual de Usuario | Smart TV</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES GENERALES
+========================================================= */
+
+:root{
+    --bg:#f4f7fb;
+    --surface:#ffffff;
+    --surface-2:#eef5ff;
+
+    --primary:#4f46e5;
+    --primary-2:#7c3aed;
+    --accent:#06b6d4;
+
+    --text:#172033;
+    --muted:#667085;
+
+    --border:#e5eaf2;
+
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --danger:#dc2626;
+
+    --shadow:0 18px 50px rgba(24,39,75,.10);
+
+    --radius:24px;
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+button{
+    font:inherit;
+}
+
+
+/* =========================================================
+   BARRA LATERAL
+========================================================= */
+
+.sidebar{
+    position:fixed;
+
+    top:0;
+    left:0;
+    bottom:0;
+
+    width:280px;
+
+    padding:28px 18px;
+
+    background:#111827;
+
+    color:white;
+
+    z-index:2000;
+
+    box-shadow:
+        12px 0 40px rgba(0,0,0,.15);
+
+    transition:.35s;
+}
+
+
+/* LOGO */
+
+.brand{
+    text-align:center;
+
+    padding:
+        10px
+        8px
+        28px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.10);
+}
+
+.brand .tv{
+    font-size:54px;
+
+    filter:
+        drop-shadow(
+            0 8px 18px
+            rgba(6,182,212,.25)
+        );
+}
+
+.brand h1{
+    font-size:21px;
+
+    letter-spacing:1px;
+
+    margin-top:4px;
+}
+
+.brand p{
+    font-size:12px;
+
+    color:#aab4c5;
+}
+
+
+/* =========================================================
+   MENÚ
+========================================================= */
+
+.menu{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+
+    margin-top:24px;
+}
+
+.menu button{
+    border:0;
+
+    background:transparent;
+
+    color:#cbd5e1;
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border-radius:14px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.menu button:hover{
+    background:
+        rgba(255,255,255,.08);
+
+    color:white;
+
+    transform:
+        translateX(3px);
+}
+
+.menu button.activo{
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-2)
+        );
+
+    color:white;
+
+    box-shadow:
+        0 10px 24px
+        rgba(79,70,229,.28);
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+========================================================= */
+
+.main{
+    margin-left:280px;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+.topbar{
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:76px;
+
+    background:
+        rgba(255,255,255,.92);
+
+    backdrop-filter:
+        blur(14px);
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 34px;
+}
+
+.topbar h2{
+    font-size:20px;
+}
+
+.estado{
+    font-size:13px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    background:#eef2ff;
+
+    padding:
+        8px 14px;
+
+    border-radius:999px;
+}
+
+
+/* BOTÓN MÓVIL */
+
+.menu-mobile{
+    display:none;
+
+    border:0;
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:12px;
+
+    width:44px;
+
+    height:44px;
+
+    cursor:pointer;
+
+    font-size:20px;
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.contenido{
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:34px;
+}
+
+
+/* =========================================================
+   PESTAÑAS
+========================================================= */
+
+.pestana{
+    display:none;
+
+    animation:
+        aparecer .45s ease;
+}
+
+.pestana.activa{
+    display:block;
+}
+
+@keyframes aparecer{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(14px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.hero{
+
+    min-height:
+        calc(100vh - 145px);
+
+    border-radius:32px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:60px 30px;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255,255,255,.18),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(6,182,212,.22),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81 55%,
+            #0891b2
+        );
+
+    box-shadow:var(--shadow);
+}
+
+
+/* CÍRCULOS DECORATIVOS */
+
+.hero:before,
+.hero:after{
+
+    content:"";
+
+    position:absolute;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:50%;
+}
+
+.hero:before{
+
+    width:460px;
+    height:460px;
+
+    right:-180px;
+    top:-200px;
+}
+
+.hero:after{
+
+    width:330px;
+    height:330px;
+
+    left:-170px;
+    bottom:-170px;
+}
+
+
+/* CONTENIDO PORTADA */
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:900px;
+}
+
+.hero-tv{
+
+    font-size:92px;
+
+    filter:
+        drop-shadow(
+            0 15px 25px
+            rgba(0,0,0,.25)
+        );
+
+    margin-bottom:12px;
+}
+
+
+/* ETIQUETA */
+
+.badge{
+
+    display:inline-block;
+
+    background:
+        rgba(255,255,255,.14);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    padding:
+        7px 15px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+
+/* TÍTULO */
+
+.hero h1{
+
+    font-size:
+        clamp(
+            38px,
+            6vw,
+            68px
+        );
+
+    letter-spacing:4px;
+
+    margin:
+        13px 0 5px;
+}
+
+.hero h2{
+
+    font-size:25px;
+
+    font-weight:400;
+}
+
+
+/* ESLOGAN */
+
+.slogan{
+
+    font-size:21px;
+
+    line-height:1.5;
+
+    margin:
+        25px auto;
+
+    max-width:760px;
+
+    font-style:italic;
+}
+
+
+/* INFORMACIÓN PORTADA */
+
+.hero-data{
+
+    margin:
+        28px auto 0;
+
+    max-width:760px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(14px);
+
+    padding:22px;
+
+    border-radius:22px;
+
+    text-align:left;
+}
+
+.hero-data div{
+    padding:8px 10px;
+}
+
+.hero-data strong{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#dbeafe;
+
+    text-transform:uppercase;
+
+    letter-spacing:.7px;
+}
+
+.hero-data span{
+    font-size:14px;
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.section-title{
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #4f46e5 65%,
+            #06b6d4
+        );
+
+    color:white;
+
+    padding:
+        28px 30px;
+
+    border-radius:24px;
+
+    margin-bottom:30px;
+
+    box-shadow:var(--shadow);
+}
+
+.section-title h1{
+    font-size:30px;
+}
+
+.section-title p{
+    margin-top:5px;
+
+    color:#e0e7ff;
+}
+
+
+/* SUBTÍTULOS */
+
+.subtitulo{
+
+    font-size:23px;
+
+    color:#312e81;
+
+    margin:
+        35px 0 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+/* =========================================================
+   TEXTO
+========================================================= */
+
+p{
+    margin-bottom:14px;
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:18px;
+
+    margin:
+        22px 0;
+}
+
+.card{
+
+    background:
+        var(--surface);
+
+    border:
+        1px solid
+        var(--border);
+
+    padding:24px;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(24,39,75,.07);
+
+    transition:.25s;
+}
+
+.card:hover{
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        var(--shadow);
+}
+
+.card .icon{
+    font-size:38px;
+}
+
+.card h3{
+
+    color:#3730a3;
+
+    margin:
+        8px 0;
+}
+
+.card small{
+    color:var(--muted);
+}
+
+
+/* =========================================================
+   CAJAS DE INFORMACIÓN
+========================================================= */
+
+.info,
+.success,
+.warning,
+.danger{
+
+    padding:
+        19px 21px;
+
+    border-radius:17px;
+
+    margin:
+        20px 0;
+
+    border-left:
+        6px solid;
+}
+
+.info{
+
+    background:#eff6ff;
+
+    border-color:#3b82f6;
+}
+
+.success{
+
+    background:#f0fdf4;
+
+    border-color:var(--success);
+}
+
+.warning{
+
+    background:#fffbeb;
+
+    border-color:var(--warning);
+}
+
+.danger{
+
+    background:#fef2f2;
+
+    border-color:var(--danger);
+}
+
+
+/* =========================================================
+   ÍNDICE
+========================================================= */
+
+.indice{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px,1fr)
+        );
+
+    gap:17px;
+}
+
+.indice-item{
+
+    background:#fff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:19px;
+
+    padding:21px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+        0 8px 24px
+        rgba(24,39,75,.06);
+}
+
+.indice-item:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:#c7d2fe;
+
+    background:#fafaff;
+}
+
+.indice-item strong{
+
+    color:#3730a3;
+
+    font-size:17px;
+}
+
+
+/* =========================================================
+   MAPA
+========================================================= */
+
+.mapa{
+
+    background:#fff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.nodo{
+
+    display:inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-2)
+        );
+
+    color:white;
+
+    padding:
+        18px 38px;
+
+    border-radius:15px;
+
+    font-weight:800;
+
+    box-shadow:
+        0 10px 25px
+        rgba(79,70,229,.25);
+}
+
+.flecha{
+
+    font-size:28px;
+
+    color:var(--accent);
+
+    margin:12px;
+}
+
+.ramas{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+}
+
+.rama{
+
+    background:#f8fafc;
+
+    border:
+        2px solid
+        #c7d2fe;
+
+    color:#3730a3;
+
+    padding:
+        14px 18px;
+
+    border-radius:14px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   PASOS
+========================================================= */
+
+.paso{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:flex-start;
+
+    background:#fff;
+
+    border:
+        1px solid
+        var(--border);
+
+    padding:21px;
+
+    margin:13px 0;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 7px 20px
+        rgba(24,39,75,.05);
+}
+
+.numero{
+
+    min-width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--accent)
+        );
+}
+
+.paso h3{
+    color:#3730a3;
+
+    margin-bottom:4px;
+}
+
+
+/* =========================================================
+   TABLAS
+========================================================= */
+
+.table-wrap{
+
+    overflow-x:auto;
+
+    margin:20px 0;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+}
+
+th{
+
+    background:#1f2937;
+
+    color:white;
+
+    padding:15px;
+
+    text-align:left;
+}
+
+td{
+
+    padding:14px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+tr:nth-child(even){
+
+    background:#f8fafc;
+}
+
+tr:hover{
+
+    background:#eef2ff;
+}
+
+
+/* =========================================================
+   CONTROL REMOTO
+========================================================= */
+
+.control{
+
+    display:grid;
+
+    grid-template-columns:
+        280px 1fr;
+
+    gap:25px;
+
+    background:#fff;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+    border:
+        1px solid
+        var(--border);
+
+    align-items:center;
+}
+
+.remote{
+
+    background:
+        linear-gradient(
+            160deg,
+            #111827,
+            #374151
+        );
+
+    border-radius:35px;
+
+    padding:25px 20px;
+
+    width:210px;
+
+    margin:auto;
+
+    box-shadow:
+        0 20px 35px
+        rgba(0,0,0,.2);
+
+    color:white;
+}
+
+.remote .screen{
+
+    background:#0b1220;
+
+    border:
+        2px solid
+        #4b5563;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    margin-bottom:18px;
+}
+
+.remote .buttons{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+}
+
+.remote button{
+
+    border:0;
+
+    border-radius:50%;
+
+    width:38px;
+
+    height:38px;
+
+    background:#e5e7eb;
+
+    color:#111827;
+
+    font-weight:700;
+}
+
+.remote .wide{
+
+    grid-column:
+        span 3;
+
+    border-radius:12px;
+
+    width:100%;
+}
+
+
+/* =========================================================
+   GLOSARIO
+========================================================= */
+
+.term{
+
+    background:#fff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-left:
+        5px solid
+        var(--primary);
+
+    border-radius:17px;
+
+    padding:19px;
+
+    margin:13px 0;
+
+    box-shadow:
+        0 7px 20px
+        rgba(24,39,75,.05);
+}
+
+.term strong{
+
+    font-size:18px;
+
+    color:#3730a3;
+}
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.search-box{
+
+    display:flex;
+
+    gap:10px;
+
+    margin:20px 0;
+}
+
+.search-box input{
+
+    flex:1;
+
+    padding:
+        14px 17px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:#fff;
+}
+
+.search-box input:focus{
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 4px
+        #eef2ff;
+}
+
+
+/* =========================================================
+   PREGUNTAS FRECUENTES
+========================================================= */
+
+.faq{
+
+    background:#fff;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:17px;
+
+    margin:12px 0;
+
+    overflow:hidden;
+}
+
+.faq summary{
+
+    cursor:pointer;
+
+    padding:17px 19px;
+
+    font-weight:700;
+
+    color:#3730a3;
+}
+
+.faq p{
+
+    padding:
+        0 19px 18px;
+
+    margin:0;
+}
+
+
+/* =========================================================
+   CONTACTOS
+========================================================= */
+
+.contact{
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #3730a3,
+            #0891b2
+        );
+
+    color:white;
+
+    padding:
+        50px 30px;
+
+    border-radius:28px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.contact h1{
+
+    font-size:34px;
+
+    margin-bottom:18px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    background:#111827;
+
+    color:#cbd5e1;
+
+    text-align:center;
+
+    padding:28px;
+
+    margin-top:20px;
+}
+
+
+/* =========================================================
+   BOTÓN VOLVER ARRIBA
+========================================================= */
+
+.arriba{
+
+    position:fixed;
+
+    right:24px;
+
+    bottom:24px;
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:var(--primary);
+
+    color:white;
+
+    text-decoration:none;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.2);
+
+    z-index:1500;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+
+        left:-290px;
+    }
+
+    .sidebar.abierto{
+
+        left:0;
+    }
+
+    .main{
+
+        margin-left:0;
+    }
+
+    .menu-mobile{
+
+        display:block;
+    }
+
+    .topbar{
+
+        padding:
+            0 18px;
+    }
+
+    .contenido{
+
+        padding:20px;
+    }
+
+    .hero{
+
+        min-height:650px;
+
+        padding:
+            30px 18px;
+    }
+
+    .hero-data{
+
+        grid-template-columns:1fr;
+    }
+
+    .control{
+
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:560px){
+
+    .topbar h2{
+
+        font-size:16px;
+    }
+
+    .estado{
+
+        display:none;
+    }
+
+    .hero h1{
+
+        letter-spacing:2px;
+    }
+
+    .hero-tv{
+
+        font-size:72px;
+    }
+
+    .hero h2{
+
+        font-size:20px;
+    }
+
+    .slogan{
+
+        font-size:17px;
+    }
+
+    .section-title h1{
+
+        font-size:24px;
+    }
+
+    .paso{
+
+        flex-direction:column;
+    }
+}
+
+
+/* =========================================================
+   IMPRESIÓN
+========================================================= */
+
+@media print{
+
+    .sidebar,
+    .topbar,
+    .arriba,
+    footer{
+
+        display:none;
+    }
+
+    .main{
+
+        margin:0;
+    }
+
+    .pestana{
+
+        display:none!important;
+    }
+
+    .pestana.activa{
+
+        display:block!important;
+    }
+
+    body{
+
+        background:white;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MENÚ LATERAL
+====================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+        <div class="tv">📺</div>
+
+        <h1>SMART TV</h1>
+
+        <p>
+            Manual de Usuario • 2026
+        </p>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <button
+            class="activo"
+            onclick="mostrarPestana('inicio',this)">
+            🏠 <span>Inicio</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('indice',this)">
+            📑 <span>Índice</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('introduccion',this)">
+            📘 <span>Introducción</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('navegacion',this)">
+            🧭 <span>Navegación</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('guias',this)">
+            📋 <span>Guías</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('control',this)">
+            🎛️ <span>Control remoto</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('reglas',this)">
+            🛡️ <span>Reglas y seguridad</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('soporte',this)">
+            🛠️ <span>Soporte</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('errores',this)">
+            ⚠️ <span>Errores</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('faq',this)">
+            💬 <span>Preguntas frecuentes</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('glosario',this)">
+            📖 <span>Glosario</span>
+        </button>
+
+        <button
+            onclick="mostrarPestana('contactos',this)">
+            📞 <span>Contactos</span>
+        </button>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+====================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <button
+        class="menu-mobile"
+        onclick="toggleMenu()">
+        ☰
+    </button>
+
+    <h2 id="tituloActual">
+        Manual de Usuario
+    </h2>
+
+    <div class="estado">
+        ● Documento académico
+    </div>
+
+</header>
+
+
+
+<div class="contenido">
+
+
+<!-- =====================================================
+     INICIO
+====================================================== -->
+
+<section
+    id="inicio"
+    class="pestana activa">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-tv">
+                📺
+            </div>
+
+            <span class="badge">
+                GUÍA DIGITAL • DOCUMENTO ACADÉMICO
+            </span>
+
+            <h1>
+                MANUAL DE USUARIO
+            </h1>
+
+            <h2>
+                TELEVISOR SMART TV
+            </h2>
+
+
+            <p class="slogan">
+
+                “Conecta tus ideas,
+                descubre nuevas experiencias
+                y disfruta de un mundo inteligente.”
+
+            </p>
+
+
+            <p>
+
+                Una guía práctica para conocer,
+                configurar y aprovechar al máximo
+                las funciones de un Smart TV.
+
+            </p>
+
+
+            <div class="hero-data">
+
+
+                <div>
+
+                    <strong>
+                        Estudiantes
+                    </strong>
+
+                    <span>
+
+                        Kimberly Margarita Cruz Méndez
+                        <br>
+
+                        Daniela Alexandra Hernández Soto
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Formación
+                    </strong>
+
+                    <span>
+                        Tercer Año Desarrollo de Software
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Docente
+                    </strong>
+
+                    <span>
+                        Humberto José Soto Gutiérrez
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Módulo / Año
+                    </strong>
+
+                    <span>
+                        3.4 • 2026
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ÍNDICE
+====================================================== -->
+
+<section
+    id="indice"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>
+            📑 Tabla de contenido
+        </h1>
+
+        <p>
+            Explore rápidamente cada apartado
+            del manual.
+        </p>
+
+    </div>
+
+
+    <div class="indice">
+
+
+        <div
+            class="indice-item"
+            onclick="ir('introduccion',2)">
+
+            <strong>
+                📘 1. Introducción
+            </strong>
+
+            <p>
+                Objetivo, alcance,
+                características y requisitos.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('navegacion',3)">
+
+            <strong>
+                🧭 2. Mapa de navegación
+            </strong>
+
+            <p>
+                Organización de los menús
+                y funciones.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('guias',4)">
+
+            <strong>
+                📋 3. Guías paso a paso
+            </strong>
+
+            <p>
+                Instalación, red, HDMI,
+                USB, imagen, sonido
+                y aplicaciones.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('control',5)">
+
+            <strong>
+                🎛️ 4. Control remoto
+            </strong>
+
+            <p>
+                Descripción de botones
+                y recomendaciones de uso.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('reglas',6)">
+
+            <strong>
+                🛡️ 5. Reglas y seguridad
+            </strong>
+
+            <p>
+                Buenas prácticas,
+                limpieza y seguridad.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('soporte',7)">
+
+            <strong>
+                🛠️ 6. Soporte
+            </strong>
+
+            <p>
+                Soluciones para
+                problemas frecuentes.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('errores',8)">
+
+            <strong>
+                ⚠️ 7. Errores
+            </strong>
+
+            <p>
+                Catálogo de mensajes
+                y acciones recomendadas.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('faq',9)">
+
+            <strong>
+                💬 8. Preguntas frecuentes
+            </strong>
+
+            <p>
+                Respuestas rápidas
+                a dudas comunes.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('glosario',10)">
+
+            <strong>
+                📖 9. Glosario
+            </strong>
+
+            <p>
+                Conceptos tecnológicos
+                importantes.
+            </p>
+
+        </div>
+
+
+        <div
+            class="indice-item"
+            onclick="ir('contactos',11)">
+
+            <strong>
+                📞 10. Contactos
+            </strong>
+
+            <p>
+                Información del
+                proyecto académico.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+<!-- =====================================================
+     INTRODUCCIÓN
+====================================================== -->
+
+<section
+    id="introduccion"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>📘 1. Introducción</h1>
+
+        <p>
+            Conozca el propósito, alcance y requisitos
+            básicos de este manual.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🎯 1.1 Objetivo del manual
+    </h2>
+
+    <p>
+        El presente Manual de Usuario tiene como finalidad
+        proporcionar una guía clara, sencilla y organizada
+        para que el usuario pueda conocer y utilizar
+        correctamente las principales funciones de un
+        Televisor Smart TV.
+    </p>
+
+    <p>
+        A través de explicaciones paso a paso se presentan
+        diferentes procedimientos relacionados con la
+        configuración inicial, conexión a Internet,
+        dispositivos externos, aplicaciones, imagen,
+        sonido y solución de problemas.
+    </p>
+
+
+    <div class="info">
+
+        <strong>💡 Importante:</strong>
+
+        <p>
+            No es necesario tener conocimientos avanzados
+            de tecnología para utilizar este manual.
+            Las instrucciones están organizadas de manera
+            progresiva para facilitar el aprendizaje.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        📌 1.2 Alcance
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">🌐</div>
+
+            <h3>Conectividad</h3>
+
+            <p>
+                Configuración de redes Wi-Fi y conexión
+                de dispositivos mediante diferentes puertos.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🎬</div>
+
+            <h3>Entretenimiento</h3>
+
+            <p>
+                Uso de aplicaciones de streaming,
+                contenido multimedia y reproducción.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🖼️</div>
+
+            <h3>Imagen</h3>
+
+            <p>
+                Ajustes de brillo, contraste, color
+                y modos de imagen.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🔊</div>
+
+            <h3>Sonido</h3>
+
+            <p>
+                Configuración del volumen, salida de audio
+                y diferentes modos de sonido.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        ⚙️ 1.3 Características de un Smart TV
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📡 Conexión a Internet</h3>
+            <p>
+                Permite conectarse a una red inalámbrica
+                para acceder a servicios y contenido en línea.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>📱 Aplicaciones</h3>
+            <p>
+                Permite utilizar diferentes aplicaciones
+                de entretenimiento y servicios digitales.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>🔌 HDMI</h3>
+            <p>
+                Permite conectar computadoras, consolas,
+                reproductores y otros dispositivos compatibles.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>💾 USB</h3>
+            <p>
+                Permite reproducir fotografías, música
+                y videos almacenados en dispositivos USB.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>📺 Canales</h3>
+            <p>
+                Permite realizar búsquedas y organizar
+                los canales disponibles.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <h3>🎛️ Configuración</h3>
+            <p>
+                Incluye opciones para personalizar
+                diferentes aspectos del televisor.
+            </p>
+        </div>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🧰 1.4 Requisitos previos
+    </h2>
+
+    <div class="success">
+
+        <strong>Antes de comenzar:</strong>
+
+        <ul style="margin:10px 0 0 20px;">
+
+            <li>
+                Tener el televisor conectado a la corriente.
+            </li>
+
+            <li>
+                Contar con el control remoto.
+            </li>
+
+            <li>
+                Tener baterías instaladas en el control.
+            </li>
+
+            <li>
+                Disponer de una conexión a Internet
+                cuando se requieran funciones en línea.
+            </li>
+
+            <li>
+                Contar con las contraseñas necesarias
+                para conectarse a una red Wi-Fi.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NAVEGACIÓN
+====================================================== -->
+
+<section
+    id="navegacion"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>🧭 2. Mapa de navegación</h1>
+
+        <p>
+            Conozca cómo se organiza el sistema
+            del Smart TV.
+        </p>
+
+    </div>
+
+
+    <div class="mapa">
+
+        <div class="nodo">
+            📺 SMART TV
+        </div>
+
+        <div class="flecha">
+            ↓
+        </div>
+
+
+        <div class="nodo">
+            🏠 Inicio
+        </div>
+
+        <div class="flecha">
+            ↓
+        </div>
+
+
+        <div class="ramas">
+
+            <div class="rama">
+                📡 TV en vivo
+            </div>
+
+            <div class="rama">
+                🌐 Internet
+            </div>
+
+            <div class="rama">
+                📱 Aplicaciones
+            </div>
+
+            <div class="rama">
+                ⚙️ Configuración
+            </div>
+
+            <div class="rama">
+                🔌 Entradas
+            </div>
+
+            <div class="rama">
+                💾 Multimedia
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🗂️ Descripción de las principales áreas
+    </h2>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Área</th>
+                    <th>Función</th>
+                    <th>Ejemplo de uso</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>🏠 Inicio</td>
+
+                    <td>
+                        Pantalla principal del televisor.
+                    </td>
+
+                    <td>
+                        Acceder rápidamente a aplicaciones.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>📺 TV</td>
+
+                    <td>
+                        Visualización de canales.
+                    </td>
+
+                    <td>
+                        Ver televisión.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>📱 Aplicaciones</td>
+
+                    <td>
+                        Acceso a servicios instalados.
+                    </td>
+
+                    <td>
+                        Abrir una plataforma de streaming.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>⚙️ Configuración</td>
+
+                    <td>
+                        Personalización del dispositivo.
+                    </td>
+
+                    <td>
+                        Cambiar idioma o red.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>🔌 Entradas</td>
+
+                    <td>
+                        Selección de dispositivos externos.
+                    </td>
+
+                    <td>
+                        Cambiar a HDMI.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>💾 Multimedia</td>
+
+                    <td>
+                        Reproducción de archivos.
+                    </td>
+
+                    <td>
+                        Ver fotografías desde USB.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>🧭 Consejo:</strong>
+
+        <p>
+            Si no encuentra una función, utilice el menú
+            de configuración o revise la sección
+            correspondiente de este manual.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     GUÍAS
+====================================================== -->
+
+<section
+    id="guias"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>📋 3. Guías paso a paso</h1>
+
+        <p>
+            Procedimientos básicos para comenzar
+            a utilizar el Smart TV.
+        </p>
+
+    </div>
+
+
+    <!-- ENCENDIDO -->
+
+    <h2 class="subtitulo">
+        🔌 3.1 Encender el televisor
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Conecte el televisor</h3>
+
+            <p>
+                Conecte el cable de alimentación a una
+                toma de corriente adecuada.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Encienda el dispositivo</h3>
+
+            <p>
+                Presione el botón de encendido
+                del control remoto.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Espere el inicio</h3>
+
+            <p>
+                Espere unos segundos mientras el
+                sistema carga la pantalla principal.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- WI-FI -->
+
+    <h2 class="subtitulo">
+        🌐 3.2 Conectar el Smart TV a Wi-Fi
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Abrir configuración</h3>
+
+            <p>
+                Desde la pantalla principal ingrese
+                al apartado <strong>Configuración</strong>.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Seleccionar red</h3>
+
+            <p>
+                Busque la opción de
+                <strong>Red o Wi-Fi</strong>.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Elegir la red</h3>
+
+            <p>
+                Seleccione el nombre de su red inalámbrica.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">4</div>
+
+        <div>
+
+            <h3>Introducir contraseña</h3>
+
+            <p>
+                Escriba correctamente la contraseña
+                de la red Wi-Fi.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">5</div>
+
+        <div>
+
+            <h3>Comprobar conexión</h3>
+
+            <p>
+                Espere a que el televisor confirme
+                que la conexión fue establecida.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="success">
+
+        <strong>✅ Conexión realizada</strong>
+
+        <p>
+            Una vez conectado, podrá utilizar
+            las funciones que requieren Internet.
+        </p>
+
+    </div>
+
+
+
+    <!-- HDMI -->
+
+    <h2 class="subtitulo">
+        🔌 3.3 Conectar un dispositivo HDMI
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Ubique el puerto HDMI</h3>
+
+            <p>
+                Busque en la parte posterior o lateral
+                del televisor una entrada identificada
+                como HDMI.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Conecte el cable</h3>
+
+            <p>
+                Conecte un extremo del cable HDMI
+                al dispositivo externo.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Conecte el otro extremo</h3>
+
+            <p>
+                Conecte el otro extremo a uno de
+                los puertos HDMI del televisor.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">4</div>
+
+        <div>
+
+            <h3>Seleccione la entrada</h3>
+
+            <p>
+                Presione el botón de entradas
+                y seleccione el puerto HDMI utilizado.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- USB -->
+
+    <h2 class="subtitulo">
+        💾 3.4 Reproducir archivos mediante USB
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Conecte la memoria USB</h3>
+
+            <p>
+                Introduzca el dispositivo USB
+                en el puerto correspondiente.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Abra Multimedia</h3>
+
+            <p>
+                Acceda al reproductor multimedia
+                desde el menú del televisor.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Seleccione el archivo</h3>
+
+            <p>
+                Elija la fotografía, música o video
+                que desea reproducir.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="warning">
+
+        <strong>⚠️ Recomendación</strong>
+
+        <p>
+            No retire el dispositivo USB mientras
+            se esté leyendo o reproduciendo un archivo.
+        </p>
+
+    </div>
+
+
+
+    <!-- IMAGEN -->
+
+    <h2 class="subtitulo">
+        🖼️ 3.5 Ajustar la imagen
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Abra Configuración</h3>
+
+            <p>
+                Ingrese al menú de configuración
+                del televisor.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Seleccione Imagen</h3>
+
+            <p>
+                Busque el apartado dedicado
+                a los ajustes de imagen.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Personalice</h3>
+
+            <p>
+                Ajuste brillo, contraste, color,
+                nitidez o modo de imagen según
+                sus preferencias.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SONIDO -->
+
+    <h2 class="subtitulo">
+        🔊 3.6 Ajustar el sonido
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Abra Configuración</h3>
+
+            <p>
+                Ingrese al menú principal de ajustes.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Entre en Sonido</h3>
+
+            <p>
+                Seleccione las opciones de audio
+                disponibles.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Seleccione el modo</h3>
+
+            <p>
+                Elija el modo de sonido que mejor
+                se adapte al contenido.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- APLICACIONES -->
+
+    <h2 class="subtitulo">
+        📱 3.7 Abrir una aplicación
+    </h2>
+
+
+    <div class="paso">
+
+        <div class="numero">1</div>
+
+        <div>
+
+            <h3>Abra el menú de aplicaciones</h3>
+
+            <p>
+                Desde la pantalla de inicio,
+                acceda al área de aplicaciones.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">2</div>
+
+        <div>
+
+            <h3>Seleccione una aplicación</h3>
+
+            <p>
+                Utilice las flechas del control
+                remoto para desplazarse.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="paso">
+
+        <div class="numero">3</div>
+
+        <div>
+
+            <h3>Presione OK</h3>
+
+            <p>
+                Seleccione la aplicación y presione
+                el botón de confirmación.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>💡 Consejo:</strong>
+
+        <p>
+            Mantenga actualizadas las aplicaciones
+            para aprovechar las mejoras disponibles.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTROL REMOTO
+====================================================== -->
+
+<section
+    id="control"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>🎛️ 4. Control remoto</h1>
+
+        <p>
+            Conozca las funciones principales
+            de los botones del control.
+        </p>
+
+    </div>
+
+
+    <div class="control">
+
+
+        <!-- CONTROL VISUAL -->
+
+        <div class="remote">
+
+            <div class="screen">
+                📺 SMART TV
+            </div>
+
+
+            <div
+                style="
+                    text-align:center;
+                    margin-bottom:15px;
+                    font-size:13px;
+                ">
+
+                CONTROL
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button>⏻</button>
+                <button>🎤</button>
+                <button>⚙️</button>
+
+                <button>▲</button>
+                <button>OK</button>
+                <button>▲</button>
+
+                <button>◀</button>
+                <button>▼</button>
+                <button>▶</button>
+
+                <button>🔊</button>
+                <button>🏠</button>
+                <button>🔇</button>
+
+                <button class="wide">
+                    VOL
+                </button>
+
+                <button class="wide">
+                    CH
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- DESCRIPCIÓN -->
+
+        <div>
+
+            <h2
+                style="
+                    color:#3730a3;
+                    margin-bottom:18px;
+                ">
+
+                Botones principales
+
+            </h2>
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Botón</th>
+                            <th>Función</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>⏻ Encendido</td>
+                            <td>
+                                Enciende o apaga el televisor.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>🏠 Inicio</td>
+                            <td>
+                                Abre la pantalla principal.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>▲ ▼ ◀ ▶</td>
+                            <td>
+                                Permiten desplazarse por los menús.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>OK</td>
+                            <td>
+                                Confirma una selección.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>🔊 Volumen</td>
+                            <td>
+                                Aumenta o disminuye el volumen.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>🔇 Silencio</td>
+                            <td>
+                                Activa o desactiva el audio.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>⚙️ Configuración</td>
+                            <td>
+                                Permite acceder a diferentes ajustes.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="warning">
+
+        <strong>⚠️ Cuidado con el control</strong>
+
+        <p>
+            Evite golpes, humedad, temperaturas extremas
+            y líquidos cerca del control remoto.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REGLAS Y SEGURIDAD
+====================================================== -->
+
+<section
+    id="reglas"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>🛡️ 5. Reglas y seguridad</h1>
+
+        <p>
+            Recomendaciones para utilizar el televisor
+            de forma correcta y segura.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        ⚡ 5.1 Seguridad eléctrica
+    </h2>
+
+
+    <div class="danger">
+
+        <strong>🚨 Advertencia</strong>
+
+        <ul style="margin:10px 0 0 20px;">
+
+            <li>
+                No manipule cables dañados.
+            </li>
+
+            <li>
+                No conecte demasiados dispositivos
+                a una misma toma.
+            </li>
+
+            <li>
+                Evite utilizar el televisor cerca del agua.
+            </li>
+
+            <li>
+                No introduzca objetos en los puertos
+                del televisor.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🧽 5.2 Limpieza
+    </h2>
+
+
+    <div class="card">
+
+        <h3>Forma correcta de limpiar</h3>
+
+        <p>
+            Apague y desconecte el televisor antes
+            de realizar la limpieza.
+        </p>
+
+        <p>
+            Utilice un paño suave y seco o ligeramente
+            humedecido, evitando aplicar líquidos
+            directamente sobre la pantalla.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        📺 5.3 Cuidado de la pantalla
+    </h2>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">
+                ❌
+            </div>
+
+            <h3>
+                No presionar
+            </h3>
+
+            <p>
+                Evite presionar o golpear la pantalla.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                💧
+            </div>
+
+            <h3>
+                Evitar líquidos
+            </h3>
+
+            <p>
+                No derrame líquidos sobre el equipo.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                ☀️
+            </div>
+
+            <h3>
+                Evitar calor excesivo
+            </h3>
+
+            <p>
+                Mantenga el televisor alejado
+                de fuentes directas de calor.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🌬️
+            </div>
+
+            <h3>
+                Ventilación
+            </h3>
+
+            <p>
+                No cubra las zonas destinadas
+                a la ventilación.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="success">
+
+        <strong>
+            ✅ Buena práctica
+        </strong>
+
+        <p>
+            Mantener el equipo limpio, ventilado
+            y correctamente conectado ayuda a
+            conservar su funcionamiento.
+        </p>
+
+    </div>
+
+</section>
+<!-- =====================================================
+     SOPORTE
+====================================================== -->
+
+<section
+    id="soporte"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>🛠️ 6. Soporte y solución de problemas</h1>
+
+        <p>
+            Encuentre soluciones para las dificultades
+            más comunes al utilizar su Smart TV.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🔎 Buscar una solución
+    </h2>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="buscador"
+            placeholder="Ejemplo: Wi-Fi, pantalla, sonido..."
+            onkeyup="buscarProblema()">
+
+    </div>
+
+
+    <div id="problemas">
+
+
+        <!-- PROBLEMA 1 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                internet wifi red conexión
+                no conecta
+            ">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <h3>
+                El televisor no se conecta a Internet
+            </h3>
+
+            <p>
+                Compruebe que el router esté encendido
+                y funcionando correctamente.
+            </p>
+
+            <p>
+                Verifique que la contraseña de la red
+                Wi-Fi haya sido introducida correctamente.
+            </p>
+
+            <div class="info">
+
+                <strong>
+                    💡 Solución recomendada
+                </strong>
+
+                <p>
+                    Desconecte temporalmente el televisor
+                    de la red e intente conectarlo nuevamente.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROBLEMA 2 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                pantalla imagen negra
+                no se ve oscura
+            ">
+
+            <div class="icon">
+                🖥️
+            </div>
+
+            <h3>
+                La pantalla no muestra imagen
+            </h3>
+
+            <p>
+                Compruebe que el televisor esté encendido
+                y que el indicador de alimentación
+                se encuentre activo.
+            </p>
+
+            <p>
+                Verifique la entrada seleccionada.
+                Si utiliza HDMI, asegúrese de haber elegido
+                el puerto correcto.
+            </p>
+
+            <div class="warning">
+
+                <strong>
+                    ⚠️ Compruebe:
+                </strong>
+
+                <p>
+                    Cable de alimentación, cable HDMI
+                    y fuente de entrada.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROBLEMA 3 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                sonido audio volumen
+                no se escucha
+            ">
+
+            <div class="icon">
+                🔊
+            </div>
+
+            <h3>
+                No se escucha el sonido
+            </h3>
+
+            <p>
+                Compruebe que el volumen no esté
+                configurado al mínimo.
+            </p>
+
+            <p>
+                Verifique que la función de silencio
+                no esté activada.
+            </p>
+
+            <div class="success">
+
+                <strong>
+                    ✅ Consejo
+                </strong>
+
+                <p>
+                    Aumente el volumen y compruebe
+                    nuevamente la reproducción.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROBLEMA 4 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                control remoto mando
+                no funciona
+                botones
+            ">
+
+            <div class="icon">
+                🎛️
+            </div>
+
+            <h3>
+                El control remoto no funciona
+            </h3>
+
+            <p>
+                Compruebe que las baterías estén
+                correctamente colocadas.
+            </p>
+
+            <p>
+                Si el problema continúa, pruebe
+                reemplazando las baterías.
+            </p>
+
+        </div>
+
+
+        <!-- PROBLEMA 5 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                aplicación app netflix
+                streaming no abre
+            ">
+
+            <div class="icon">
+                📱
+            </div>
+
+            <h3>
+                Una aplicación no abre
+            </h3>
+
+            <p>
+                Compruebe la conexión a Internet
+                y espere unos segundos.
+            </p>
+
+            <p>
+                Si la aplicación continúa sin funcionar,
+                cierre la aplicación e intente abrirla
+                nuevamente.
+            </p>
+
+        </div>
+
+
+        <!-- PROBLEMA 6 -->
+
+        <div
+            class="card problema"
+            data-texto="
+                usb memoria video
+                fotografía archivo
+            ">
+
+            <div class="icon">
+                💾
+            </div>
+
+            <h3>
+                El televisor no reconoce el USB
+            </h3>
+
+            <p>
+                Compruebe que la memoria USB esté
+                correctamente conectada.
+            </p>
+
+            <p>
+                También puede probar con otro puerto USB
+                disponible en el televisor.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        id="sinResultados"
+        class="warning"
+        style="display:none;">
+
+        <strong>
+            🔍 No se encontraron resultados
+        </strong>
+
+        <p>
+            Intente utilizar palabras como
+            <strong>Wi-Fi</strong>,
+            <strong>sonido</strong>,
+            <strong>pantalla</strong>,
+            <strong>USB</strong> o
+            <strong>control</strong>.
+        </p>
+
+    </div>
+
+
+    <h2 class="subtitulo">
+        🧰 Recomendaciones generales
+    </h2>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <div class="icon">
+                🔄
+            </div>
+
+            <h3>
+                Reiniciar
+            </h3>
+
+            <p>
+                Reiniciar el televisor puede ayudar
+                a solucionar problemas temporales.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <h3>
+                Comprobar Internet
+            </h3>
+
+            <p>
+                Verifique que otros dispositivos
+                puedan conectarse a la misma red.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🔌
+            </div>
+
+            <h3>
+                Revisar conexiones
+            </h3>
+
+            <p>
+                Compruebe cables, puertos y
+                dispositivos externos.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                📖
+            </div>
+
+            <h3>
+                Consultar el manual
+            </h3>
+
+            <p>
+                Utilice las diferentes secciones
+                de esta guía para encontrar ayuda.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATÁLOGO DE ERRORES
+====================================================== -->
+
+<section
+    id="errores"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>⚠️ 7. Catálogo de errores</h1>
+
+        <p>
+            Problemas frecuentes, posibles causas
+            y acciones recomendadas.
+        </p>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Código
+                    </th>
+
+                    <th>
+                        Problema
+                    </th>
+
+                    <th>
+                        Posible causa
+                    </th>
+
+                    <th>
+                        Solución
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                <tr>
+
+                    <td>
+                        E01
+                    </td>
+
+                    <td>
+                        Sin conexión
+                    </td>
+
+                    <td>
+                        La red Wi-Fi no está disponible.
+                    </td>
+
+                    <td>
+                        Revisar la conexión de red.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        E02
+                    </td>
+
+                    <td>
+                        Sin imagen
+                    </td>
+
+                    <td>
+                        Entrada incorrecta.
+                    </td>
+
+                    <td>
+                        Seleccionar la fuente correcta.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        E03
+                    </td>
+
+                    <td>
+                        Sin sonido
+                    </td>
+
+                    <td>
+                        Volumen bajo o silencio activado.
+                    </td>
+
+                    <td>
+                        Revisar volumen y audio.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        E04
+                    </td>
+
+                    <td>
+                        USB no detectado
+                    </td>
+
+                    <td>
+                        Dispositivo no reconocido.
+                    </td>
+
+                    <td>
+                        Desconectar y conectar nuevamente.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        E05
+                    </td>
+
+                    <td>
+                        Aplicación no disponible
+                    </td>
+
+                    <td>
+                        Problema de conexión o aplicación.
+                    </td>
+
+                    <td>
+                        Revisar Internet y volver a intentar.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        E06
+                    </td>
+
+                    <td>
+                        Control sin respuesta
+                    </td>
+
+                    <td>
+                        Baterías agotadas.
+                    </td>
+
+                    <td>
+                        Reemplazar las baterías.
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="danger">
+
+        <strong>
+            🚨 Importante
+        </strong>
+
+        <p>
+            Si el problema persiste después de realizar
+            las comprobaciones básicas, evite desmontar
+            el televisor por cuenta propia.
+        </p>
+
+        <p>
+            Solicite asistencia técnica especializada.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PREGUNTAS FRECUENTES
+====================================================== -->
+
+<section
+    id="faq"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>💬 8. Preguntas frecuentes</h1>
+
+        <p>
+            Respuestas rápidas a las dudas más comunes.
+        </p>
+
+    </div>
+
+
+    <details class="faq">
+
+        <summary>
+            📺 ¿Qué es un Smart TV?
+        </summary>
+
+        <p>
+            Es un televisor que incorpora funciones
+            inteligentes y permite acceder a servicios,
+            aplicaciones y contenido digital.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🌐 ¿Necesito Internet para ver televisión?
+        </summary>
+
+        <p>
+            No necesariamente. Las funciones básicas
+            de televisión pueden utilizarse sin Internet,
+            mientras que muchas aplicaciones y servicios
+            en línea requieren conexión.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            📡 ¿Cómo conecto el televisor al Wi-Fi?
+        </summary>
+
+        <p>
+            Ingrese a Configuración, seleccione Red o Wi-Fi,
+            elija su red e introduzca la contraseña.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🔌 ¿Para qué sirve HDMI?
+        </summary>
+
+        <p>
+            HDMI permite transmitir imagen y sonido
+            desde dispositivos compatibles hacia
+            el televisor.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            💾 ¿Qué puedo hacer con una memoria USB?
+        </summary>
+
+        <p>
+            Puede utilizarse para reproducir archivos
+            multimedia compatibles, como fotografías,
+            música y videos.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🔊 ¿Qué hago si no tengo sonido?
+        </summary>
+
+        <p>
+            Compruebe el volumen, revise que el modo
+            silencio esté desactivado y verifique
+            las opciones de salida de audio.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🎛️ ¿Qué hago si el control remoto no responde?
+        </summary>
+
+        <p>
+            Revise la posición de las baterías
+            y, si es necesario, reemplácelas.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🔄 ¿Es recomendable reiniciar el televisor?
+        </summary>
+
+        <p>
+            Sí. Reiniciar el equipo puede ayudar
+            a solucionar algunos problemas temporales
+            de funcionamiento.
+        </p>
+
+    </details>
+
+
+    <details class="faq">
+
+        <summary>
+            🛠️ ¿Qué hago si el problema continúa?
+        </summary>
+
+        <p>
+            Consulte la sección de soporte y errores.
+            Si el problema persiste, busque asistencia
+            técnica especializada.
+        </p>
+
+    </details>
+
+</section>
+
+
+
+<!-- =====================================================
+     GLOSARIO
+====================================================== -->
+
+<section
+    id="glosario"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>📖 9. Glosario</h1>
+
+        <p>
+            Conceptos tecnológicos utilizados
+            en este manual.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            📺 Smart TV
+        </strong>
+
+        <p>
+            Televisor que incorpora funciones inteligentes,
+            conectividad y acceso a aplicaciones o servicios
+            digitales.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🌐 Wi-Fi
+        </strong>
+
+        <p>
+            Tecnología que permite conectar dispositivos
+            a una red de manera inalámbrica.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🔌 HDMI
+        </strong>
+
+        <p>
+            Interfaz utilizada para transmitir
+            señales digitales de audio y video.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            💾 USB
+        </strong>
+
+        <p>
+            Tipo de conexión utilizada para conectar
+            dispositivos y acceder a determinados archivos.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            📱 Aplicación
+        </strong>
+
+        <p>
+            Programa diseñado para realizar una
+            función determinada dentro de un dispositivo.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            📡 Red
+        </strong>
+
+        <p>
+            Sistema que permite conectar diferentes
+            dispositivos para compartir información
+            y servicios.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🔊 Audio
+        </strong>
+
+        <p>
+            Señal relacionada con el sonido reproducido
+            por el televisor.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🖼️ Resolución
+        </strong>
+
+        <p>
+            Cantidad de detalle que puede mostrar
+            una imagen en pantalla.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            ⚙️ Configuración
+        </strong>
+
+        <p>
+            Conjunto de opciones que permiten
+            personalizar el funcionamiento del televisor.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🎛️ Control remoto
+        </strong>
+
+        <p>
+            Dispositivo utilizado para controlar
+            diferentes funciones del televisor
+            a distancia.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            🔄 Reinicio
+        </strong>
+
+        <p>
+            Acción de apagar y volver a iniciar
+            un dispositivo o sistema.
+        </p>
+
+    </div>
+
+
+    <div class="term">
+
+        <strong>
+            📶 Señal
+        </strong>
+
+        <p>
+            Información transmitida entre dispositivos
+            mediante un medio determinado.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACTOS
+====================================================== -->
+
+<section
+    id="contactos"
+    class="pestana">
+
+    <div class="section-title">
+
+        <h1>📞 10. Contactos</h1>
+
+        <p>
+            Información correspondiente al proyecto académico.
+        </p>
+
+    </div>
+
+
+    <div class="contact">
+
+        <div
+            style="
+                font-size:70px;
+                margin-bottom:10px;
+            ">
+
+            📺
+
+        </div>
+
+
+        <h1>
+            Manual de Usuario
+        </h1>
+
+
+        <p
+            style="
+                font-size:20px;
+                margin-bottom:28px;
+            ">
+
+            Televisor Smart TV
+
+        </p>
+
+
+        <div class="grid"
+             style="
+                text-align:left;
+                max-width:800px;
+                margin:auto;
+             ">
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    👩‍💻 Estudiante 1
+                </h3>
+
+                <p>
+                    Kimberly Margarita Cruz Méndez
+                </p>
+
+            </div>
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    👩‍💻 Estudiante 2
+                </h3>
+
+                <p>
+                    Daniela Alexandra Hernández Soto
+                </p>
+
+            </div>
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    👨‍🏫 Docente
+                </h3>
+
+                <p>
+                    Humberto José Soto Gutiérrez
+                </p>
+
+            </div>
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    🎓 Nivel
+                </h3>
+
+                <p>
+                    Tercer Año Desarrollo de Software
+                </p>
+
+            </div>
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    📚 Módulo
+                </h3>
+
+                <p>
+                    3.4
+                </p>
+
+            </div>
+
+
+            <div
+                class="card"
+                style="
+                    color:#172033;
+                ">
+
+                <h3>
+                    📅 Año
+                </h3>
+
+                <p>
+                    2026
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <p
+            style="
+                margin-top:35px;
+                font-size:17px;
+            ">
+
+            ✨ Gracias por consultar nuestro manual.
+
+            <br>
+
+            Esperamos que esta guía le ayude a
+            disfrutar de una experiencia sencilla,
+            segura y agradable con su Smart TV.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+</div>
+<!-- FIN DEL CONTENEDOR -->
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <p>
+        📺 <strong>Manual de Usuario — Smart TV</strong>
+    </p>
+
+    <p>
+        Proyecto académico • Tercer Año Desarrollo de Software
+        • Módulo 3.4 • 2026
+    </p>
+
+    <p
+        style="
+            margin-top:8px;
+            font-size:12px;
+            color:#94a3b8;
+        ">
+
+        “Conecta tus ideas, descubre nuevas experiencias
+        y disfruta de un mundo inteligente.”
+
+    </p>
+
+</footer>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTÓN VOLVER ARRIBA
+====================================================== -->
+
+<a
+    href="#"
+    class="arriba"
+    title="Volver arriba">
+
+    ↑
+
+</a>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   TÍTULOS DE LAS SECCIONES
+====================================================== */
+
+const titulos = {
+
+    inicio:
+        "Manual de Usuario",
+
+    indice:
+        "Tabla de Contenido",
+
+    introduccion:
+        "Introducción",
+
+    navegacion:
+        "Mapa de Navegación",
+
+    guias:
+        "Guías Paso a Paso",
+
+    control:
+        "Control Remoto",
+
+    reglas:
+        "Reglas y Seguridad",
+
+    soporte:
+        "Soporte y Solución de Problemas",
+
+    errores:
+        "Catálogo de Errores",
+
+    faq:
+        "Preguntas Frecuentes",
+
+    glosario:
+        "Glosario",
+
+    contactos:
+        "Contactos"
+
+};
+
+
+
+/* =====================================================
+   MOSTRAR PESTAÑA
+====================================================== */
+
+function mostrarPestana(id, boton){
+
+    /*
+       Ocultar todas las secciones
+    */
+
+    const pestanas =
+        document.querySelectorAll(".pestana");
+
+
+    pestanas.forEach(
+        pestana => {
+
+            pestana.classList.remove(
+                "activa"
+            );
+
+        }
+    );
+
+
+    /*
+       Mostrar la sección seleccionada
+    */
+
+    const seleccionada =
+        document.getElementById(id);
+
+
+    if(seleccionada){
+
+        seleccionada.classList.add(
+            "activa"
+        );
+
+    }
+
+
+    /*
+       Quitar estado activo
+       de todos los botones
+    */
+
+    const botones =
+        document.querySelectorAll(
+            ".menu button"
+        );
+
+
+    botones.forEach(
+        b => {
+
+            b.classList.remove(
+                "activo"
+            );
+
+        }
+    );
+
+
+    /*
+       Activar botón seleccionado
+    */
+
+    if(boton){
+
+        boton.classList.add(
+            "activo"
+        );
+
+    }
+
+
+    /*
+       Cambiar título superior
+    */
+
+    const titulo =
+        document.getElementById(
+            "tituloActual"
+        );
+
+
+    if(titulo){
+
+        titulo.textContent =
+            titulos[id] ||
+            "Manual de Usuario";
+
+    }
+
+
+    /*
+       Llevar la página arriba
+    */
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    /*
+       Cerrar menú en celulares
+    */
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("abierto");
+
+}
+
+
+
+/* =====================================================
+   NAVEGAR DESDE EL ÍNDICE
+====================================================== */
+
+function ir(id){
+
+    const boton =
+        [...document.querySelectorAll(
+            ".menu button"
+        )]
+        .find(
+            b =>
+                b.getAttribute(
+                    "onclick"
+                ) &&
+                b.getAttribute(
+                    "onclick"
+                ).includes(
+                    "'" + id + "'"
+                )
+        );
+
+
+    mostrarPestana(
+        id,
+        boton
+    );
+
+}
+
+
+
+/* =====================================================
+   MENÚ PARA CELULAR
+====================================================== */
+
+function toggleMenu(){
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    sidebar.classList.toggle(
+        "abierto"
+    );
+
+}
+
+
+
+/* =====================================================
+   BUSCADOR DE PROBLEMAS
+====================================================== */
+
+function buscarProblema(){
+
+    const input =
+        document
+            .getElementById(
+                "buscador"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const problemas =
+        document.querySelectorAll(
+            ".problema"
+        );
+
+
+    let encontrados = 0;
+
+
+    problemas.forEach(
+        problema => {
+
+            const texto =
+                (
+                    problema.innerText +
+                    " " +
+                    problema.dataset.texto
+                )
+                .toLowerCase();
+
+
+            if(
+                texto.includes(input)
+                ||
+                input === ""
+            ){
+
+                problema.style.display =
+                    "block";
+
+                encontrados++;
+
+            }else{
+
+                problema.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    const sinResultados =
+        document.getElementById(
+            "sinResultados"
+        );
+
+
+    if(
+        encontrados === 0
+        &&
+        input !== ""
+    ){
+
+        sinResultados.style.display =
+            "block";
+
+    }else{
+
+        sinResultados.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CERRAR MENÚ AL HACER CLIC FUERA
+====================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const boton =
+            document.querySelector(
+                ".menu-mobile"
+            );
+
+
+        if(
+            window.innerWidth <= 900
+            &&
+            sidebar.classList.contains(
+                "abierto"
+            )
+            &&
+            !sidebar.contains(event.target)
+            &&
+            !boton.contains(event.target)
+        ){
+
+            sidebar.classList.remove(
+                "abierto"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   TECLA ESC PARA CERRAR MENÚ
+====================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            document
+                .getElementById(
+                    "sidebar"
+                )
+                .classList.remove(
+                    "abierto"
+                );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   BOTÓN VOLVER ARRIBA
+====================================================== */
+
+document
+    .querySelector(".arriba")
+    .addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            window.scrollTo({
+
+                top:0,
+
+                behavior:"smooth"
+
+            });
+
+        }
+    );
+
+
+
+/* =====================================================
+   INICIO
+====================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const inicio =
+            document.getElementById(
+                "inicio"
+            );
+
+        if(inicio){
+
+            inicio.classList.add(
+                "activa"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
